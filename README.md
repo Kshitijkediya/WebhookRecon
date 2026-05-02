@@ -51,11 +51,3 @@ Example:
 * Machine learning-based anomaly detection
 * Retry and backoff strategies
 * Dashboard for monitoring mismatches
-
-## 👨‍💻 Author
-
-Your Name
-
----
-
-"Making systems resilient, one transaction at a time."
