@@ -17,7 +17,5 @@ htmlcov/
 node_modules/
 frontend/dist/
 frontend/.next/
-
-# Claude Code — local AI assistant config (not for version control)
 CLAUDE.md
 .claude/
