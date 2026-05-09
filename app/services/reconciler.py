@@ -18,7 +18,6 @@ class Mismatch:
 async def find_mismatches(db: AsyncSession) -> list[Mismatch]:
     mismatches: list[Mismatch] = []
 
-    # Events stuck in PROCESSING for more than 10 minutes
     stale_cutoff = datetime.now(timezone.utc) - timedelta(minutes=10)
     stale_result = await db.execute(
         select(WebhookEvent).where(
