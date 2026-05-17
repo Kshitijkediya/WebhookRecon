@@ -33,7 +33,6 @@ async def _handle_missed_event(mismatch: Mismatch, db: AsyncSession) -> None:
         )
         return
 
-    # In production this would replay the event through the payment provider API
     transaction_id = _extract_transaction_id(event)
     if transaction_id:
         ledger = LedgerRecord(
