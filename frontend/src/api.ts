@@ -9,8 +9,9 @@ export async function fetchStatus(): Promise<StatusData> {
 }
 
 export async function fetchAuditLogs(resolved?: boolean): Promise<AuditLog[]> {
-  const params = resolved !== undefined ? `?resolved=${resolved}` : "";
-  const res = await fetch(`${BASE}/audit-logs${params}&limit=50`);
+  const params = new URLSearchParams({ limit: "50" });
+  if (resolved !== undefined) params.set("resolved", String(resolved));
+  const res = await fetch(`${BASE}/audit-logs?${params}`);
   if (!res.ok) throw new Error("Failed to fetch audit logs");
   return res.json();
 }
