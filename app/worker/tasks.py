@@ -34,9 +34,9 @@ def run_reconciliation() -> dict:
 
 async def _process_event_async(event_id: str) -> dict:
     from app.db.models import EventState, WebhookEvent
-    from app.db.session import AsyncSessionLocal
+    from app.db.session import WorkerSessionLocal
 
-    async with AsyncSessionLocal() as db:
+    async with WorkerSessionLocal() as db:
         result = await db.execute(
             select(WebhookEvent).where(WebhookEvent.id == event_id)
         )
@@ -62,11 +62,11 @@ async def _process_event_async(event_id: str) -> dict:
 
 
 async def _run_reconciliation_async() -> dict:
-    from app.db.session import AsyncSessionLocal
+    from app.db.session import WorkerSessionLocal
     from app.services.healer import heal
     from app.services.reconciler import find_mismatches
 
-    async with AsyncSessionLocal() as db:
+    async with WorkerSessionLocal() as db:
         mismatches = await find_mismatches(db)
         for mismatch in mismatches:
             await heal(mismatch, db)
